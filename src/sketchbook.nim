@@ -9,7 +9,7 @@ type Sketch = object
   date: string
 
 proc render_index(title: string, sketches: seq[Sketch]): string =
-  compile_template_file("templates/index.nimja", base_dir = get_script_dir())
+  compile_template_file("../templates/index.nimja", base_dir = get_script_dir())
 
 proc main() {.async.} =
   var server = new_async_http_server()
