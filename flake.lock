@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "nimja-pkg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1757584170,
+        "narHash": "sha256-ZSrQAem7s8IhFf8lRJvGgqwIxxkB5ECMMj46SPYiMkQ=",
+        "owner": "enthus1ast",
+        "repo": "nimja",
+        "rev": "438fc1f6c654c69cd85c9a5d9cbe45a48f507f8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "enthus1ast",
+        "repo": "nimja",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1759036355,
@@ -37,6 +53,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "nimja-pkg": "nimja-pkg",
         "nixpkgs": "nixpkgs"
       }
     },

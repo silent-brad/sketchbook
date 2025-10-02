@@ -1,5 +1,8 @@
 import std/asynchttpserver, std/asyncdispatch
-import nimja/parser
+
+#import nimja/parser
+from pkgs/nimja/nimja import compile_template_file, get_script_dir
+
 import std/sequtils, std/paths, std/strutils
 import os, random
 

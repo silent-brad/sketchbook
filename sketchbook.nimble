@@ -5,7 +5,6 @@ author = "Brad White"
 description = "Digital Sketchbook"
 license = "MIT"
 srcDir = "src"
-bin = @["sketchbook"]
 
 # Dependencies
 

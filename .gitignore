@@ -1,7 +1,4 @@
 result
-sketchbook
+bin/app
+src/pkgs
 sketches
-.cache
-.config
-.local
-.nimble
