@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h1>{{ title }}</h1>
+  <ul>
+  {% for (idx, sketch) in sketches.pairs %}
+      <li>
+        <h2>{{ sketch.title }}</h2>
+        <h3>Sketch #{{ idx }}</h3>
+        <p>{{ sketch.tags | map(proc(tag: string): string = "<span class=\"tag\">" & tag & "</span>") | join(" ") }}</p>
+        <p>{{ sketch.date }}</p>
+      </li>
+  {% endfor %}
+  </ul>
+</body>
+</html>
