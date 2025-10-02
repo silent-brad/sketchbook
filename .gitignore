@@ -1,4 +1,5 @@
 result
 bin/app
-src/pkgs
+src/*
+!src/sketchbook.nim
 sketches

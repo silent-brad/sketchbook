@@ -28,10 +28,8 @@
 
             # Manually install nim packages
             # NOTE: I sadly couldn't get Nimble to work with Nix flakes yet
-            mkdir -p src/pkgs
-
-            mkdir -p src/pkgs/nimja
-            cp -r ${nimja-pkg}/src/* src/pkgs/nimja
+            mkdir -p src/nimja
+            cp -r ${nimja-pkg}/src/nimja/* src/nimja
 
             export HOME=$(pwd)
             ${pkgs.nim-2_0}/bin/nim c -d:release -o:$out/bin/app src/sketchbook.nim
