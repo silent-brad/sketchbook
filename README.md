@@ -1,2 +1,2 @@
-# sketches
-My Digital Sketches Site
+# sketchbook
+My Digital Sketchbook Site
