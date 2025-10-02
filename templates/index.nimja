@@ -7,12 +7,11 @@
   <h1>{{ title }}</h1>
   <ul>
   {% for (idx, sketch) in sketches.pairs %}
-      <li>
-        <h2>{{ sketch.title }}</h2>
-        <h3>Sketch #{{ idx }}</h3>
-        <p>{{ sketch.tags | map(proc(tag: string): string = "<span class=\"tag\">" & tag & "</span>") | join(" ") }}</p>
-        <p>{{ sketch.date }}</p>
-      </li>
+    <li>
+      <h2>{{ sketch.title }}</h2>
+      <h3>Sketch #{{ idx }}</h3>
+      <img src="/sketches/{{ sketch.file_name }}" alt="{{ sketch.title }}"/>
+    </li>
   {% endfor %}
   </ul>
 </body>
