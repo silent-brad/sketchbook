@@ -3,3 +3,4 @@ bin/app
 src/*
 !src/sketchbook.nim
 sketches
+sketchbook.log

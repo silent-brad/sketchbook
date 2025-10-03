@@ -5,14 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     # Manually install nim packages
-    # NOTE: I sadly couldn't get Nimble to work with Nix flakes yet
-    nimja-pkg = {
-      url = "github:enthus1ast/nimja";
-      flake = false;
-    };
+    #nimja-pkg = {
+    #url = "github:enthus1ast/nimja";
+    #flake = false;
+    #};
+    nim-pkgs.url = "path:./nimpkgs";
   };
 
-  outputs = { self, nixpkgs, flake-utils, nimja-pkg }:
+  outputs = { self, nixpkgs, flake-utils, nim-pkgs }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; };
       in {
@@ -27,9 +27,10 @@
             mkdir -p $out/bin
 
             # Manually install nim packages
-            # NOTE: I sadly couldn't get Nimble to work with Nix flakes yet
-            mkdir -p src/nimja
-            cp -r ${nimja-pkg}/src/nimja/* src/nimja
+            #mkdir -p src/nimja
+            #cp -r $\{nimja-pkg}/src/nimja/* src/nimja
+
+            cp -r ${nim-pkgs.packages.${system}.default}/src/* src/*
 
             export HOME=$(pwd)
             ${pkgs.nim-2_0}/bin/nim c -d:release -o:$out/bin/app src/sketchbook.nim
