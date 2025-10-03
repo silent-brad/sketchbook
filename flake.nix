@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    # Manually install nim packages
-    #nimja-pkg = {
-    #url = "github:enthus1ast/nimja";
-    #flake = false;
-    #};
     nim-pkgs.url = "path:./nimpkgs";
   };
 
@@ -27,10 +22,9 @@
             mkdir -p $out/bin
 
             # Manually install nim packages
-            #mkdir -p src/nimja
-            #cp -r $\{nimja-pkg}/src/nimja/* src/nimja
-
-            cp -r ${nim-pkgs.packages.${system}.default}/src/* src/*
+            for pkg in ${nim-pkgs.packages.${system}.default}/pkgs/*; do
+              cp -r $pkg src/$(basename $pkg)
+            done
 
             export HOME=$(pwd)
             ${pkgs.nim-2_0}/bin/nim c -d:release -o:$out/bin/app src/sketchbook.nim

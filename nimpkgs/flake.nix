@@ -5,15 +5,19 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     # Add more packages here:
-    nim-pkgs = [{
-      name = "nimja";
+    #happyx = {
+    #  url = "github:HapticX/happyx";
+    #  flake = false;
+    #};
+
+    nimja = {
       url = "github:enthus1ast/nimja";
-      rev = "master";
+      #rev = "master";
       flake = false;
-    }];
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nim-pkgs }:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; };
       in {
@@ -22,16 +26,19 @@
           version = "0.0.1";
           src = ./.;
 
-          installPhase = ''
+          configurePhase = ''
             mkdir -p $out/pkgs
-            #cp -r $\{pkgs.nimja}/* $out/pkgs
-            #mkdir -p src/nimja
-            #cp -r $\{nimja-pkg}/src/nimja/* src/nimja
-            ${map (pkg: ''
-              mkdir -p $out/pkgs/${pkg.name}
-              cp -r ${pkg}/src/${pkg.name}/* $out/pkgs/${pkg.name}
-            '') nim-pkgs}
           '';
+
+          installPhase = builtins.concatStringsSep "\n" (builtins.map (name:
+            if name == "self" || name == "nixpkgs" || name == "flake-utils" then
+              ""
+            else
+              let value = inputs.${name};
+              in ''
+                mkdir -p $out/pkgs/${name}
+                cp -r ${value}/src/${name}/* $out/pkgs/${name}
+              '') (builtins.attrNames inputs));
         };
 
         devShells.default = pkgs.mkShell {
